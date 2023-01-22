@@ -1,5 +1,6 @@
 package attornatus.person.service;
 
+import attornatus.person.exception.PersonNotFoundException;
 import attornatus.person.model.Address;
 import attornatus.person.model.Person;
 import org.springframework.stereotype.Service;
@@ -35,7 +36,11 @@ public class PersonService {
     }
 
     public Person findById(String id) {
-        return personMap.get(id);
+        Person person = personMap.get(id);
+        if(person == null){
+            throw new PersonNotFoundException(id);
+        }
+        return person;
     }
 
     public Person create(Person personCreate) {
