@@ -1,16 +1,17 @@
 package attornatus.person.controller.dto;
 
 import attornatus.person.model.Address;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
-import java.time.LocalDate;
 
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class PersonDTO {
     private String id;
     private String name;
-    private LocalDate birthDate;
+    @JsonFormat(pattern = "dd/MM/yyyy")
+    private String birthDate;
     private Address address;
 
     public String getId() {
@@ -29,11 +30,11 @@ public class PersonDTO {
         this.name = name;
     }
 
-    public LocalDate getBirthDate() {
+    public String getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(LocalDate birthDate) {
+    public void setBirthDate(String birthDate) {
         this.birthDate = birthDate;
     }
 

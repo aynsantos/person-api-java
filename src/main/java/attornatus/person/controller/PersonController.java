@@ -5,16 +5,18 @@ import attornatus.person.controller.dto.PersonDTO;
 import attornatus.person.controller.mapper.PersonMapper;
 import attornatus.person.model.Person;
 import attornatus.person.service.PersonService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/person")
+@Api(tags = "Person Controller")
 public class PersonController {
 
 
@@ -27,10 +29,27 @@ public class PersonController {
     }
 
     @GetMapping
-    public List<PersonDTO> findAll(){
+    @ApiOperation("Find all persons")
+    public ResponseEntity<List<PersonDTO>> findAll(){
         List<Person> personList = personService.findAll();
         List<PersonDTO> result = personMapper.toPersonDTOList(personList);
-        return result;
+        return ResponseEntity.ok(result);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<PersonDTO> findById(@PathVariable String id){
+        Person person = personService.findById(id);
+        PersonDTO result = personMapper.toPersonDTO(person);
+        return ResponseEntity.ok(result);
+    }
+
+    @PostMapping
+    public ResponseEntity<PersonDTO> create(@RequestBody PersonDTO dto) {
+        Person personCreate = personMapper.toPerson(dto);
+        Person person = personService.create(personCreate);
+        PersonDTO result = personMapper.toPersonDTO(person);
+        return ResponseEntity.status(HttpStatus.CREATED).body(result);
+
     }
 
 
