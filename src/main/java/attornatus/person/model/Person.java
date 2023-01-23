@@ -1,20 +1,21 @@
 package attornatus.person.model;
 
 
-
-
-
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 
 public class Person {
 
+
+
     private String id;
     private String name;
-    private String birthDate;
-    private Address address;
+    private Date birthDate;
+    private List<Address> address;
 
 
-
-    public Person(String id, String name, String birthDate, Address address) {
+    public Person(String id, String name, Date birthDate, List<Address> address) {
         this.id = id;
         this.name = name;
         this.birthDate = birthDate;
@@ -42,26 +43,24 @@ public class Person {
         this.name = name;
     }
 
-    public String getBirthDate() {
+    public Date getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(String birthDate) {
+    public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
     }
 
-    public Address getAddress() {
+    public List<Address> getAddress() {
         return address;
     }
 
-
-    public void setAddress(Address address) {
+    public void setAddress(List<Address> address) {
         this.address = address;
     }
 
-    public Address createAddress(String street, String zipCode, String city){
-        return address;
-    }
+
+
 
 
 

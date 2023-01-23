@@ -49,8 +49,24 @@ public class PersonController {
         Person person = personService.create(personCreate);
         PersonDTO result = personMapper.toPersonDTO(person);
         return ResponseEntity.status(HttpStatus.CREATED).body(result);
-
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity delete(@PathVariable String id){
+      personService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
+
+
+    @PutMapping("/{id}")
+    public ResponseEntity<PersonDTO> update(@PathVariable String id, @RequestBody PersonDTO dto) {
+        Person personCreate = personMapper.toPerson(dto);
+        Person person = personService.update(id, personCreate);
+        PersonDTO result = personMapper.toPersonDTO(person);
+        return ResponseEntity.status(HttpStatus.OK).body(result);
+    }
+
+
 
 
 }

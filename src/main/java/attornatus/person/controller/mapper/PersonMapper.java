@@ -24,4 +24,5 @@ public class PersonMapper {
     public Person toPerson(PersonDTO dto) {
         return MODEL_MAPPER.map(dto, Person.class);
     }
+
 }

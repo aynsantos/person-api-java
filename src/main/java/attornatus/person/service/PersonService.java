@@ -50,4 +50,17 @@ public class PersonService {
         return personCreate;
 
     }
+
+    public void delete(String id) {
+        findById(id);
+        personMap.remove(id);
+
+    }
+
+    public Person update(String id, Person personCreate) {
+        Person person = findById(id);
+        person.setName(personCreate.getName());
+        personMap.replace(id, person);
+        return person;
+    }
 }
