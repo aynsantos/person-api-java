@@ -19,7 +19,7 @@ public class Person{
     private String id;
     private String name;
     private String birthDate;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "person_id")
     private List<Address> addresses = new ArrayList<>();
 
