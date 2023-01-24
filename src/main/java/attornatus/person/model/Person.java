@@ -19,7 +19,8 @@ public class Person{
     private String id;
     private String name;
     private String birthDate;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "person")
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "person_id")
     private List<Address> addresses = new ArrayList<>();
 
 
