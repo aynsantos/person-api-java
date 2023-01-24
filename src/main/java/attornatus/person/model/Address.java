@@ -2,16 +2,19 @@ package attornatus.person.model;
 
 
 import attornatus.person.enums.AddressType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-;
+
 
 
 @Entity
-@Table(name = "addresses")
+@Table(name = "address")
 public class Address {
 
-    @ManyToOne(fetch = FetchType.LAZY)
+
+    @ManyToOne
+    @JoinColumn(name = "person_id")
     private Person person;
 
     @Id

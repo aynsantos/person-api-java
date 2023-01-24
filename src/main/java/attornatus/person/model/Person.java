@@ -12,16 +12,14 @@ import java.util.List;
 
 
 @Entity
-@Table(name = "persons")
-public class Person {
+@Table(name = "person")
+public class Person{
 
     @Id
     private String id;
     private String name;
-    //@JsonFormat(pattern = "dd/MM/yyyy")
     private String birthDate;
-
-    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "person")
     private List<Address> addresses = new ArrayList<>();
 
 

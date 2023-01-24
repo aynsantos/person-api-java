@@ -1,7 +1,6 @@
 package attornatus.person.controller.dto;
 
 import attornatus.person.model.Address;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.util.ArrayList;
@@ -12,7 +11,7 @@ import java.util.List;
 public class PersonDTO {
     private String id;
     private String name;
-    //@JsonFormat(pattern = "dd/MM/yyyy")
+
     private String birthDate;
     private List<Address> addresses = new ArrayList<>();
 

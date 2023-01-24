@@ -7,7 +7,6 @@ import attornatus.person.controller.mapper.AddressMapper;
 import attornatus.person.controller.mapper.PersonMapper;
 import attornatus.person.model.Address;
 import attornatus.person.model.Person;
-import attornatus.person.model.exception.PersonNotFoundException;
 import attornatus.person.service.PersonService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

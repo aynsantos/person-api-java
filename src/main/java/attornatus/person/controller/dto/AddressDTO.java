@@ -4,12 +4,33 @@ import attornatus.person.enums.AddressType;
 
 public class AddressDTO {
 
-    private PersonDTO personDTO;
+
+
+    private long id;
     private String street;
     private String zipCode;
     private String city;
     private AddressType type;
 
+    public AddressDTO(long id, String street, String zipCode, String city, AddressType type) {
+        this.id = id;
+        this.street = street;
+        this.zipCode = zipCode;
+        this.city = city;
+        this.type = type;
+    }
+
+    public AddressDTO(){
+
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getStreet() {
         return street;
