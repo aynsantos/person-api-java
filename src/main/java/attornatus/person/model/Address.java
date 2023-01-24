@@ -3,9 +3,20 @@ package attornatus.person.model;
 
 import attornatus.person.enums.AddressType;
 
+import javax.persistence.*;
+;
+
+
+@Entity
+@Table(name = "addresses")
 public class Address {
 
+    @ManyToOne(fetch = FetchType.LAZY)
     private Person person;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
     private String street;
     private String zipCode;
     private String city;

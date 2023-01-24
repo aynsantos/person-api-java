@@ -1,20 +1,29 @@
 package attornatus.person.model;
 
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 
+
+
+import javax.persistence.*;
 
 import java.util.ArrayList;
 
 import java.util.List;
 
+
+@Entity
+@Table(name = "persons")
 public class Person {
 
+    @Id
     private String id;
     private String name;
     //@JsonFormat(pattern = "dd/MM/yyyy")
     private String birthDate;
+
+    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Address> addresses = new ArrayList<>();
+
 
     public Person(String id, String name, String birthDate, List<Address> addresses) {
         this.id = id;

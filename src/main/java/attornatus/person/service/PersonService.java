@@ -3,6 +3,7 @@ package attornatus.person.service;
 import attornatus.person.model.Address;
 import attornatus.person.model.exception.PersonNotFoundException;
 import attornatus.person.model.Person;
+import attornatus.person.repository.PersonRepository;
 import org.springframework.stereotype.Service;
 
 
@@ -13,10 +14,17 @@ import java.util.stream.Collectors;
 @Service
 public class PersonService {
 
-    private static Map<String, Person> personMap = new HashMap<>();
+    private final PersonRepository personRepository;
+
+
+
+    public PersonService(PersonRepository personRepository) {
+        this.personRepository = personRepository;
+    }
 
 
     public List<Person> findAll(){
+        return personRepository.findAll();
         return personMap.values().stream().collect(Collectors.toList());
     }
 
@@ -28,13 +36,6 @@ public class PersonService {
         Person person = personMap.get(id);
         if(person == null){
             throw new PersonNotFoundException(id);
-        }
-        return person;
-    }
-    public Person findByName(String name) {
-        Person person = personMap.get(name);
-        if(person == null){
-            throw new PersonNotFoundException(name);
         }
         return person;
     }
@@ -67,13 +68,6 @@ public class PersonService {
         return person;
 
     }
-
-
-
-
-
-
-
 
 
 
