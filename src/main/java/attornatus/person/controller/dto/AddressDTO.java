@@ -1,26 +1,15 @@
-package attornatus.person.model;
-
+package attornatus.person.controller.dto;
 
 import attornatus.person.enums.AddressType;
 
-public class Address {
+public class AddressDTO {
 
-    private Person person;
+    private PersonDTO personDTO;
     private String street;
     private String zipCode;
     private String city;
     private AddressType type;
 
-    public Address(String street, String zipCode, String city, AddressType type) {
-        this.street = street;
-        this.zipCode = zipCode;
-        this.city = city;
-        this.type = type;
-    }
-
-    public Address(){
-
-    }
 
     public String getStreet() {
         return street;
@@ -53,6 +42,4 @@ public class Address {
     public void setType(AddressType type) {
         this.type = type;
     }
-
-
 }

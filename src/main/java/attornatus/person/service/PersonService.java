@@ -1,7 +1,7 @@
 package attornatus.person.service;
 
-import attornatus.person.exception.PersonNotFoundException;
 import attornatus.person.model.Address;
+import attornatus.person.model.exception.PersonNotFoundException;
 import attornatus.person.model.Person;
 import org.springframework.stereotype.Service;
 
@@ -13,19 +13,8 @@ import java.util.stream.Collectors;
 @Service
 public class PersonService {
 
-
-
-
     private static Map<String, Person> personMap = new HashMap<>();
 
-    static {
-        var id = getUUID();
-        var id2 = getUUID();
-        Person person = new Person (id,"Zoro","12/12/1989",new Address("test", "test", "test"));
-        Person person2 = new Person (id2,"Luffy","11/11/1998",new Address("test2", "test2", "test2"));
-        personMap.put(id, person);
-        personMap.put(id2, person2);
-    }
 
     public List<Person> findAll(){
         return personMap.values().stream().collect(Collectors.toList());
@@ -39,6 +28,13 @@ public class PersonService {
         Person person = personMap.get(id);
         if(person == null){
             throw new PersonNotFoundException(id);
+        }
+        return person;
+    }
+    public Person findByName(String name) {
+        Person person = personMap.get(name);
+        if(person == null){
+            throw new PersonNotFoundException(name);
         }
         return person;
     }
@@ -63,4 +59,22 @@ public class PersonService {
         personMap.replace(id, person);
         return person;
     }
+
+
+    public Person addNewAddress(String id, Address createAddress){
+        Person person = findById(id);
+        person.addNewAddresses(createAddress);
+        return person;
+
+    }
+
+
+
+
+
+
+
+
+
+
 }

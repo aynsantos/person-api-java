@@ -4,15 +4,17 @@ import attornatus.person.model.Address;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
+import java.util.ArrayList;
+import java.util.List;
 
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class PersonDTO {
     private String id;
     private String name;
-    @JsonFormat(pattern = "dd/MM/yyyy")
+    //@JsonFormat(pattern = "dd/MM/yyyy")
     private String birthDate;
-    private Address address;
+    private List<Address> addresses = new ArrayList<>();
 
     public String getId() {
         return id;
@@ -38,12 +40,14 @@ public class PersonDTO {
         this.birthDate = birthDate;
     }
 
-    public Address getAddress() {
-        return address;
+    public List<Address> getAddresses() {
+        return addresses;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
+    public void setAddresses(List<Address> addresses) {
+        this.addresses = addresses;
     }
+
+
 
 }

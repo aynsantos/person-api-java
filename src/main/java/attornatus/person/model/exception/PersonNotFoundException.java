@@ -1,4 +1,4 @@
-package attornatus.person.exception;
+package attornatus.person.model.exception;
 
 
 import org.springframework.http.HttpStatus;

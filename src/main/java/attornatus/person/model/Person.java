@@ -1,25 +1,26 @@
 package attornatus.person.model;
 
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+
+import java.util.ArrayList;
+
 import java.util.List;
 
 public class Person {
 
-
-
     private String id;
     private String name;
-    private Date birthDate;
-    private List<Address> address;
+    //@JsonFormat(pattern = "dd/MM/yyyy")
+    private String birthDate;
+    private List<Address> addresses = new ArrayList<>();
 
-
-    public Person(String id, String name, Date birthDate, List<Address> address) {
+    public Person(String id, String name, String birthDate, List<Address> addresses) {
         this.id = id;
         this.name = name;
         this.birthDate = birthDate;
-        this.address = address;
+        this.addresses = addresses;
     }
 
     public Person(){
@@ -43,25 +44,25 @@ public class Person {
         this.name = name;
     }
 
-    public Date getBirthDate() {
+    public String getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(Date birthDate) {
+    public void setBirthDate(String birthDate) {
         this.birthDate = birthDate;
     }
 
-    public List<Address> getAddress() {
-        return address;
+    public List<Address> getAddresses() {
+        return addresses;
     }
 
-    public void setAddress(List<Address> address) {
-        this.address = address;
+    public void setAddresses(List<Address> addresses) {
+        this.addresses = addresses;
     }
 
-
-
-
+    public void addNewAddresses(Address addresses) {
+        this.addresses.add(addresses);
+    }
 
 
 }

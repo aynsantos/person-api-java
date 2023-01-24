@@ -1,9 +1,13 @@
 package attornatus.person.controller;
 
 
+import attornatus.person.controller.dto.AddressDTO;
 import attornatus.person.controller.dto.PersonDTO;
+import attornatus.person.controller.mapper.AddressMapper;
 import attornatus.person.controller.mapper.PersonMapper;
+import attornatus.person.model.Address;
 import attornatus.person.model.Person;
+import attornatus.person.model.exception.PersonNotFoundException;
 import attornatus.person.service.PersonService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -23,9 +27,12 @@ public class PersonController {
     private final PersonService personService;
     private final PersonMapper personMapper;
 
-    public PersonController(PersonService personService, PersonMapper personMapper) {
+    private final AddressMapper addressMapper;
+
+    public PersonController(PersonService personService, PersonMapper personMapper, AddressMapper addressMapper) {
         this.personService = personService;
         this.personMapper = personMapper;
+        this.addressMapper = addressMapper;
     }
 
     @GetMapping
@@ -37,6 +44,7 @@ public class PersonController {
     }
 
     @GetMapping("/{id}")
+    @ApiOperation("Find person")
     public ResponseEntity<PersonDTO> findById(@PathVariable String id){
         Person person = personService.findById(id);
         PersonDTO result = personMapper.toPersonDTO(person);
@@ -44,6 +52,7 @@ public class PersonController {
     }
 
     @PostMapping
+    @ApiOperation("Create person")
     public ResponseEntity<PersonDTO> create(@RequestBody PersonDTO dto) {
         Person personCreate = personMapper.toPerson(dto);
         Person person = personService.create(personCreate);
@@ -52,6 +61,7 @@ public class PersonController {
     }
 
     @DeleteMapping("/{id}")
+    @ApiOperation("Delete person")
     public ResponseEntity delete(@PathVariable String id){
       personService.delete(id);
         return ResponseEntity.noContent().build();
@@ -59,12 +69,33 @@ public class PersonController {
 
 
     @PutMapping("/{id}")
+    @ApiOperation("Update person")
     public ResponseEntity<PersonDTO> update(@PathVariable String id, @RequestBody PersonDTO dto) {
         Person personCreate = personMapper.toPerson(dto);
         Person person = personService.update(id, personCreate);
         PersonDTO result = personMapper.toPersonDTO(person);
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
+
+    @PatchMapping("/{id}")
+    @ApiOperation("Create address for a person")
+    public ResponseEntity<PersonDTO> updateAddress(@PathVariable String id, @RequestBody AddressDTO addressDTO){
+        Address addressCreate = addressMapper.toAddress(addressDTO);
+        Person address = personService.addNewAddress(id, addressCreate);
+        PersonDTO result = personMapper.toPersonDTO(address);
+        return ResponseEntity.status(HttpStatus.OK).body(result);
+
+    }
+
+
+
+
+
+
+
+
+
+
 
 
 
