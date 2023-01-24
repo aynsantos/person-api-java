@@ -7,6 +7,7 @@ import attornatus.person.controller.mapper.AddressMapper;
 import attornatus.person.controller.mapper.PersonMapper;
 import attornatus.person.model.Address;
 import attornatus.person.model.Person;
+import attornatus.person.repository.AddressRepository;
 import attornatus.person.service.PersonService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -59,7 +60,7 @@ public class PersonController {
         return ResponseEntity.status(HttpStatus.CREATED).body(result);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{de}")
     @ApiOperation("Delete person")
     public ResponseEntity delete(@PathVariable String id){
       personService.delete(id);
@@ -86,6 +87,13 @@ public class PersonController {
 
     }
 
+    @GetMapping("/{id}/addresses")
+    @ApiOperation("Find all address by person")
+    public ResponseEntity<List<Address>> findAllAddressByPerson(@PathVariable String id){
+        Person person = personService.findById(id);
+        List<Address> result = addressMapper.findAddressByPerson(person);
+        return ResponseEntity.ok(result);
+    }
 
 
 }

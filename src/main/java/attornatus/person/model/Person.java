@@ -1,13 +1,7 @@
 package attornatus.person.model;
 
-
-
-
-
 import javax.persistence.*;
-
 import java.util.ArrayList;
-
 import java.util.List;
 
 
