@@ -1,11 +1,8 @@
 package attornatus.person.model;
 
-
 import attornatus.person.enums.AddressType;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-
 
 
 @Entity
